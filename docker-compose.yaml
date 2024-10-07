@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: docker-gpu
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./code:/code
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
